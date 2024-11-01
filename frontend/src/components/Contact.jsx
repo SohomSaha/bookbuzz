@@ -88,33 +88,11 @@ function Contact() {
                 <br />
               </div>
               <div className="flex justify-around mt-6">
-                <button
-                  type="submit"
-                  className="bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-900"
-                  onClick={() =>
-                    document.getElementById("my_modal_1").showModal()
-                  }
-                >
-                  Submit
-                </button>
+              <Link to="/">
+                        <button className="bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-900">Submit</button>
+                        </Link>
               </div>
             </form>
-            <dialog id="my_modal_1" className="modal dark:bg-slate-900 dark:text-white">
-                  <div className="modal-box dark:bg-slate-900 dark:text-white">
-                    <h3 className="font-bold text-lg">Hello!</h3>
-                    <p className="py-4">
-                      Thank you for contacting us ,we will reach out to you soon :)
-                    </p>
-                    <div className="modal-action">
-                      <form method="dialog">
-                        {/* if there is a button in form, it will close the modal */}
-                        <Link to="/">
-                        <button className="bg-pink-500 text-white rounded-md px-3 py-1 hover:bg-pink-900">Back to Home Page</button>
-                        </Link>
-                      </form>
-                    </div>
-                  </div>
-                </dialog>
           </div>
         </div>
       </div>
