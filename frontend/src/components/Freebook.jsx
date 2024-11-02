@@ -61,7 +61,7 @@ function Freebook() {
           <h1 className="font-semibold text-xl pb-2">Free offered courses</h1>
         </div>
         <div className="">
-          <Slider {...settings}>
+          <Slider {...settings} className="">
             {book.map((item) => (
               <Cards item={item} key={item.id} />
             ))}

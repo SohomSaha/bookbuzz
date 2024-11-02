@@ -1,13 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+
+import toast from "react-hot-toast";
 function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async (data) => {
+    const userInfo = {
+      email: data.email,
+      password: data.password,
+    };
+    await axios
+      .post("http://localhost:4001/user/login", userInfo)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data) {
+          toast.success("Logged in successfully");
+          setTimeout(() => {
+            document.getElementById("my_modal_3").close();
+            localStorage.setItem("Users", JSON.stringify(res.data.user));
+            window.location.reload();
+          },3000);
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log(err);
+          toast.error(err.response.data.error);
+        }
+      });
+  };
   return (
     <div className="">
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
@@ -29,7 +56,7 @@ function Login() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="w-80 px-3 py-1 border rounded-md outline-none"
+                className="w-80 px-3 py-1 border rounded-md outline-none text-black"
                 {...register("email", { required: true })}
               />
               <br />
@@ -45,7 +72,7 @@ function Login() {
               <input
                 type="password"
                 placeholder="Enter your password"
-                className="w-80 px-3 py-1 border rounded-md outline-none"
+                className="w-80 px-3 py-1 border rounded-md outline-none text-black"
                 {...register("password", { required: true })}
               />
               <br />
